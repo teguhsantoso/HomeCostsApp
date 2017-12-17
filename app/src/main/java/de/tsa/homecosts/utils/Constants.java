@@ -1,4 +1,4 @@
-package de.homecosts.santoso.homecostsapp.utils;
+package de.tsa.homecosts.utils;
 
 /**
  * Created by Teguh Santoso on 03.12.2017.

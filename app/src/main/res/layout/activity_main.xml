@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:layout_marginLeft="5dp"
     android:layout_marginRight="5dp"
-    tools:context="de.homecosts.santoso.homecostsapp.MainActivity">
+    tools:context="de.tsa.homecosts.MainActivity">
 
     <FrameLayout
         android:id="@+id/fragment_container"

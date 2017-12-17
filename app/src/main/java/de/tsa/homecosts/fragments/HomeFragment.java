@@ -1,4 +1,4 @@
-package de.homecosts.santoso.homecostsapp.fragments;
+package de.tsa.homecosts.fragments;
 
 import android.content.Context;
 import android.net.Uri;
@@ -13,7 +13,8 @@ import android.widget.Spinner;
 import java.util.ArrayList;
 import java.util.List;
 
-import de.homecosts.santoso.homecostsapp.R;
+import de.tsa.homecosts.R;
+
 
 /**
  * A simple {@link Fragment} subclass.

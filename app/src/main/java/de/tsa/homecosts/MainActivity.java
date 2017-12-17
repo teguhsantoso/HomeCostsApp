@@ -1,4 +1,4 @@
-package de.homecosts.santoso.homecostsapp;
+package de.tsa.homecosts;
 
 import android.net.Uri;
 import android.os.Bundle;
@@ -11,14 +11,14 @@ import android.widget.Toast;
 
 import java.util.List;
 
-import de.homecosts.santoso.homecostsapp.fragments.ExpenditureFragment;
-import de.homecosts.santoso.homecostsapp.fragments.HomeFragment;
-import de.homecosts.santoso.homecostsapp.presenters.MainPresenterCallback;
-import de.homecosts.santoso.homecostsapp.utils.Constants;
+import de.tsa.homecosts.fragments.ExpenditureFragment;
+import de.tsa.homecosts.fragments.HomeFragment;
+import de.tsa.homecosts.presenters.MainPresenterCallback;
+import de.tsa.homecosts.utils.Constants;
 
 public class MainActivity extends AppCompatActivity implements MainPresenterCallback, HomeFragment.OnFragmentInteractionListener, ExpenditureFragment.OnFragmentInteractionListener{
-    private HomeFragment            fragmentHome;
-    private ExpenditureFragment     fragmentExpenditure;
+    private HomeFragment fragmentHome;
+    private ExpenditureFragment fragmentExpenditure;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {

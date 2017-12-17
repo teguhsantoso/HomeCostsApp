@@ -1,4 +1,4 @@
-package de.homecosts.santoso.homecostsapp.presenters;
+package de.tsa.homecosts.presenters;
 
 import android.app.Activity;
 import android.content.Context;
@@ -9,7 +9,7 @@ import android.content.Context;
 
 public class MainPresenterImpl implements MainPresenter {
     private Context                 cTxt;
-    private MainPresenterCallback   presenterCallback;
+    private MainPresenterCallback presenterCallback;
 
     public MainPresenterImpl(MainPresenterCallback presenterCallback) {
         this.presenterCallback = presenterCallback;

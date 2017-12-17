@@ -1,4 +1,4 @@
-package de.homecosts.santoso.homecostsapp.fragments;
+package de.tsa.homecosts.fragments;
 
 import android.content.Context;
 import android.net.Uri;
@@ -8,7 +8,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import de.homecosts.santoso.homecostsapp.R;
+import de.tsa.homecosts.R;
+
 
 /**
  * A simple {@link Fragment} subclass.

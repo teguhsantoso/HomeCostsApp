@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="de.homecosts.santoso.homecostsapp.fragments.HomeFragment">
+    tools:context="de.tsa.homecosts.fragments.HomeFragment">
 
     <TextView
         android:id="@+id/textViewTitle"
