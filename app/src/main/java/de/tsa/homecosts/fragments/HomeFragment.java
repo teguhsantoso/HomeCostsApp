@@ -10,10 +10,13 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
+import java.text.DateFormatSymbols;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import de.tsa.homecosts.R;
+import de.tsa.homecosts.utils.Constants;
 
 
 /**
@@ -71,32 +74,30 @@ public class HomeFragment extends Fragment {
     private void initSpinnerMonth(View rootView) {
         spinnerMonth = rootView.findViewById(R.id.spinnerMonth);
         List months = new ArrayList<String>();
-        months.add("Januar");
-        months.add("Februar");
-        months.add("März");
-        months.add("April");
-        months.add("Mai");
-        months.add("Juni");
-        months.add("Juli");
-        months.add("August");
-        months.add("September");
-        months.add("Oktober");
-        months.add("November");
-        months.add("Dezember");
+        for(int i = Constants.START_INDEX; i < Constants.END_INDEX_MONTH; i++){
+            String strMonth = new DateFormatSymbols().getMonths()[i];
+            months.add(strMonth);
+        }
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, months);
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerMonth.setAdapter(dataAdapter);
+        Calendar calendar = Calendar.getInstance();
+        int currentMonth = calendar.get(Calendar.MONTH);
+        spinnerMonth.setSelection(currentMonth);
     }
 
     private void initSpinnerYear(View rootView) {
+        Calendar calendar = Calendar.getInstance();
+        int year = calendar.get(Calendar.YEAR);
         spinnerYear = rootView.findViewById(R.id.spinnerYear);
         List years = new ArrayList<String>();
-        years.add("2017");
-        years.add("2018");
-        years.add("2019");
+        for(int i = Constants.START_INDEX; i < Constants.END_INDEX_YEAR; i++){
+            years.add(year+i);
+        }
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, years);
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerYear.setAdapter(dataAdapter);
+        spinnerYear.setSelection(((ArrayAdapter<String>)spinnerYear.getAdapter()).getPosition(String.valueOf(year)));
     }
 
     // TODO: Rename method, update argument and hook method into UI event
