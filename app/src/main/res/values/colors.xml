@@ -3,4 +3,26 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="orange">#FF8000</color>
+    <color name="black">#000000</color>
+    <color name="white">#FFFFFF</color>
+    <color name="darkGrey">#585858</color>
+    <color name="lightGrey">#D8D8D8</color>
+    <color name="lightGreen">#9AFE2E</color>
+    <color name="red">#FF0000</color>
+    <color name="green">#04B404</color>
+    <color name="blue">#4000FF</color>
+    <color name="yellow">#FFFF00</color>
+    <color name="warn">#edda00</color>
+    <color name="brown">#61380B</color>
+    <color name="base">#FFFFFB</color>
+    <color name="overlay">#AA1C1C1C</color>
+    <color name="text">#1C1C1C</color>
+    <color name="handle">#86C166</color>
+    <color name="frame">#86C166</color>
+    <color name="guide">#AA86C166</color>
+    <color name="menu_bg">#FFFFFB</color>
+    <color name="primaryShadow">#AAFFFFFF</color>
+    <color name="transparent">#80FFFFFF</color>
+    <color name="colorHeader">#E8EBEF</color>
 </resources>

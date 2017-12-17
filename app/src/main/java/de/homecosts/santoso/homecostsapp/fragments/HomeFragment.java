@@ -7,7 +7,11 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import de.homecosts.santoso.homecostsapp.R;
 
@@ -22,8 +26,9 @@ import de.homecosts.santoso.homecostsapp.R;
 public class HomeFragment extends Fragment {
     private static final String             ARG_PARAM_FRAGMENT_TAG = "fragmentTag";
     private View                            rootView;
-    private String                          fragmentTag;
     private OnFragmentInteractionListener   mListener;
+    private Spinner                         spinnerYear;
+    private Spinner                         spinnerMonth;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -49,7 +54,7 @@ public class HomeFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            fragmentTag = getArguments().getString(ARG_PARAM_FRAGMENT_TAG);
+            // Do nothing.
         }
     }
 
@@ -57,9 +62,40 @@ public class HomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         rootView = inflater.inflate(R.layout.fragment_home, container, false);
-        TextView textViewTitle = rootView.findViewById(R.id.textViewTitle);
-        textViewTitle.setText(fragmentTag);
+        initSpinnerYear(rootView);
+        initSpinnerMonth(rootView);
         return rootView;
+    }
+
+    private void initSpinnerMonth(View rootView) {
+        spinnerMonth = rootView.findViewById(R.id.spinnerMonth);
+        List months = new ArrayList<String>();
+        months.add("Januar");
+        months.add("Februar");
+        months.add("März");
+        months.add("April");
+        months.add("Mai");
+        months.add("Juni");
+        months.add("Juli");
+        months.add("August");
+        months.add("September");
+        months.add("Oktober");
+        months.add("November");
+        months.add("Dezember");
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, months);
+        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerMonth.setAdapter(dataAdapter);
+    }
+
+    private void initSpinnerYear(View rootView) {
+        spinnerYear = rootView.findViewById(R.id.spinnerYear);
+        List years = new ArrayList<String>();
+        years.add("2017");
+        years.add("2018");
+        years.add("2019");
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, years);
+        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerYear.setAdapter(dataAdapter);
     }
 
     // TODO: Rename method, update argument and hook method into UI event
