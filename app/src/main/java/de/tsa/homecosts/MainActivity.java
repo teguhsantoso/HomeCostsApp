@@ -11,12 +11,14 @@ import android.widget.Toast;
 
 import java.util.List;
 
+import de.tsa.homecosts.entities.Expenditure;
 import de.tsa.homecosts.fragments.ExpenditureFragment;
 import de.tsa.homecosts.fragments.HomeFragment;
 import de.tsa.homecosts.presenters.MainPresenterCallback;
 import de.tsa.homecosts.utils.Constants;
+import de.tsa.homecosts.utils.ExpenditureItemAdapter;
 
-public class MainActivity extends AppCompatActivity implements MainPresenterCallback, HomeFragment.OnFragmentInteractionListener, ExpenditureFragment.OnFragmentInteractionListener{
+public class MainActivity extends AppCompatActivity implements MainPresenterCallback, ExpenditureItemAdapter.OnAdapterInteractionListener, HomeFragment.OnFragmentInteractionListener, ExpenditureFragment.OnFragmentInteractionListener{
     private HomeFragment fragmentHome;
     private ExpenditureFragment fragmentExpenditure;
 
@@ -117,7 +119,13 @@ public class MainActivity extends AppCompatActivity implements MainPresenterCall
 
     @Override
     public void showExpenditures(List expenditures) {
-
+        // TODO
+        // Add implementation here.
     }
 
+    @Override
+    public void onExpenditureItemClicked(Expenditure expenditure) {
+        // TODO
+        // Add implementation here.
+    }
 }

@@ -31,6 +31,9 @@ public class Expenditure implements Serializable{
     @ColumnInfo(name = "month")
     private int month;
 
+    @ColumnInfo(name = "amount")
+    private double amountPayment;
+
     @Embedded
     OutcomeCategory category;
 
@@ -80,5 +83,13 @@ public class Expenditure implements Serializable{
 
     public void setMonth(int month) {
         this.month = month;
+    }
+
+    public double getAmountPayment() {
+        return amountPayment;
+    }
+
+    public void setAmountPayment(double amountPayment) {
+        this.amountPayment = amountPayment;
     }
 }

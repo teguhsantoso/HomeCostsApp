@@ -21,6 +21,10 @@ public class OutcomeCategory implements Serializable {
     @ColumnInfo(name = "category_name")
     private String name;
 
+    public OutcomeCategory(String name) {
+        this.name = name;
+    }
+
     public int getId() {
         return id;
     }

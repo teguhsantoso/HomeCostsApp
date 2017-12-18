@@ -16,7 +16,7 @@ import de.tsa.homecosts.entities.Expenditure;
 public class ExpenditureItemAdapter extends RecyclerView.Adapter<ExpenditureItemAdapter.CustomViewHolder> {
 
     public interface OnAdapterInteractionListener {
-        void onOrderItemClicked(Expenditure expenditure);
+        void onExpenditureItemClicked(Expenditure expenditure);
     }
 
     private static Context                          cTxt;
@@ -37,9 +37,9 @@ public class ExpenditureItemAdapter extends RecyclerView.Adapter<ExpenditureItem
 
     @Override
     public void onBindViewHolder(final CustomViewHolder customViewHolder, final int i) {
-        customViewHolder.textViewProductName.setText(data.get(i).getName());
-        customViewHolder.textViewSupplierName.setText(data.get(i).getChargeDate());
-        customViewHolder.textViewSumOrders.setText("Sum orders #");
+        customViewHolder.textViewExpenditureName.setText(data.get(i).getChargeDate() + "\n" + data.get(i).getName());
+        customViewHolder.textViewCategory.setText(data.get(i).getCategory().getName());
+        customViewHolder.textViewSumPayment.setText(String.valueOf(data.get(i).getAmountPayment()) + " EUR");
     }
 
     @Override
@@ -48,21 +48,21 @@ public class ExpenditureItemAdapter extends RecyclerView.Adapter<ExpenditureItem
     }
 
     public static class CustomViewHolder extends RecyclerView.ViewHolder {
-        protected TextView textViewProductName;
-        protected TextView textViewSupplierName;
-        protected TextView textViewSumOrders;
+        protected TextView textViewExpenditureName;
+        protected TextView textViewCategory;
+        protected TextView textViewSumPayment;
         protected ImageButton buttonDeleteItem;
 
         public CustomViewHolder(View view) {
             super(view);
-            this.textViewProductName = view.findViewById(R.id.textViewProductName);
-            this.textViewSupplierName = view.findViewById(R.id.textViewSupplierName);
-            this.textViewSumOrders = view.findViewById(R.id.textViewSumOrders);
+            this.textViewExpenditureName = view.findViewById(R.id.textViewExpenditureName);
+            this.textViewCategory = view.findViewById(R.id.textViewCategory);
+            this.textViewSumPayment = view.findViewById(R.id.textViewSum);
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     mListener = (OnAdapterInteractionListener) cTxt;
-                    mListener.onOrderItemClicked(data.get(getAdapterPosition()));
+                    mListener.onExpenditureItemClicked(data.get(getAdapterPosition()));
                 }
             });
         }

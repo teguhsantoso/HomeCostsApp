@@ -14,36 +14,36 @@
         android:layout_height="45dp"
         android:id="@+id/imageView"
         android:layout_marginStart="10dp"
-        android:src="@drawable/ic_launcher_foreground"
+        android:src="@drawable/ic_monetization_on_black_18dp"
         android:scaleType="fitXY"
-        android:contentDescription="desc"
+        android:contentDescription="imageDescription"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true" />
 
     <TextView
-        android:id="@+id/textViewProductName"
+        android:id="@+id/textViewExpenditureName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_marginStart="10dp"
         android:layout_toEndOf="@+id/imageView"
-        android:text="Product name"
+        android:text="Expenditure name"
         android:textSize="16sp" />
 
     <TextView
-        android:id="@+id/textViewSupplierName"
+        android:id="@+id/textViewCategory"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/textViewProductName"
-        android:layout_below="@+id/textViewProductName"
-        android:text="Supplier name" />
+        android:layout_alignStart="@+id/textViewExpenditureName"
+        android:layout_below="@+id/textViewExpenditureName"
+        android:text="Category" />
 
     <TextView
-        android:id="@+id/textViewSumOrders"
+        android:id="@+id/textViewSum"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/textViewSupplierName"
-        android:layout_below="@+id/textViewSupplierName"
-        android:text="Sum of orders" />
+        android:layout_alignStart="@+id/textViewCategory"
+        android:layout_below="@+id/textViewCategory"
+        android:text="Sum of payment" />
 
 </RelativeLayout>
