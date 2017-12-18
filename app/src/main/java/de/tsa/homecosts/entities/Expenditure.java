@@ -25,6 +25,12 @@ public class Expenditure implements Serializable{
     @ColumnInfo(name = "charge_date")
     private String chargeDate;
 
+    @ColumnInfo(name = "year")
+    private int year;
+
+    @ColumnInfo(name = "month")
+    private int month;
+
     @Embedded
     OutcomeCategory category;
 
@@ -58,5 +64,21 @@ public class Expenditure implements Serializable{
 
     public void setCategory(OutcomeCategory category) {
         this.category = category;
+    }
+
+    public int getYear() {
+        return year;
+    }
+
+    public void setYear(int year) {
+        this.year = year;
+    }
+
+    public int getMonth() {
+        return month;
+    }
+
+    public void setMonth(int month) {
+        this.month = month;
     }
 }

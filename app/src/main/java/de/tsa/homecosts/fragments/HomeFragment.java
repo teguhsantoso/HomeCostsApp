@@ -4,10 +4,13 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageButton;
 import android.widget.Spinner;
 
 import java.text.DateFormatSymbols;
@@ -16,7 +19,9 @@ import java.util.Calendar;
 import java.util.List;
 
 import de.tsa.homecosts.R;
+import de.tsa.homecosts.entities.Expenditure;
 import de.tsa.homecosts.utils.Constants;
+import de.tsa.homecosts.utils.ExpenditureItemAdapter;
 
 
 /**
@@ -33,6 +38,9 @@ public class HomeFragment extends Fragment {
     private OnFragmentInteractionListener   mListener;
     private Spinner                         spinnerYear;
     private Spinner                         spinnerMonth;
+    private ImageButton                     buttonRefreshListExpenditures;
+    private ExpenditureItemAdapter          mAdapter;
+    private RecyclerView                    mRecyclerView;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -64,11 +72,39 @@ public class HomeFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         rootView = inflater.inflate(R.layout.fragment_home, container, false);
         initSpinnerYear(rootView);
         initSpinnerMonth(rootView);
+        initButtonRefreshList(rootView);
+        initRecyclerView(rootView);
         return rootView;
+    }
+
+    private void initRecyclerView(View rootView) {
+        this.mRecyclerView = rootView.findViewById(R.id.expenditures);
+        this.mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+        List data = new ArrayList<Expenditure>();
+        Expenditure data1 = new Expenditure();
+        data1.setName("Vollksbank Wohnung Ratenzahlung");
+        data1.setChargeDate("01.12.2017");
+        data1.setMonth(11);
+        data1.setYear(2017);
+        data.add(data1);
+
+        this.mAdapter = new ExpenditureItemAdapter(getActivity(), data);
+        this.mRecyclerView.setAdapter(mAdapter);
+        this.mAdapter.notifyDataSetChanged();
+    }
+
+    private void initButtonRefreshList(View rootView) {
+        buttonRefreshListExpenditures = rootView.findViewById(R.id.imageButtonRefresh);
+        buttonRefreshListExpenditures.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
     }
 
     private void initSpinnerMonth(View rootView) {
@@ -113,8 +149,7 @@ public class HomeFragment extends Fragment {
         if (context instanceof OnFragmentInteractionListener) {
             mListener = (OnFragmentInteractionListener) context;
         } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
+            throw new RuntimeException(context.toString() + " must implement OnFragmentInteractionListener");
         }
     }
 
