@@ -13,8 +13,9 @@ import de.tsa.homecosts.entities.Expenditure;
 public interface RoomInteractor {
 
     interface OnRoomInteractionListener {
-        void onResponse(List products);
+        void onResponse(List expenditures);
         void affectedRow(int rows);
+        void insertedId(long id);
     }
 
     void getAllData(Context cTxt, OnRoomInteractionListener listener);

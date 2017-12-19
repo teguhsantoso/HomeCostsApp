@@ -19,7 +19,7 @@ public interface ExpenditureDAO {
     List<Expenditure> getAll();
 
     @Insert
-    int insertProduct(Expenditure expenditure);
+    long insertProduct(Expenditure expenditure);
 
     @Delete
     int delete(Expenditure expenditure);

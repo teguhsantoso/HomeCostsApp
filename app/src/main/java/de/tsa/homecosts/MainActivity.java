@@ -15,11 +15,14 @@ import de.tsa.homecosts.entities.Expenditure;
 import de.tsa.homecosts.fragments.ExpenditureFragment;
 import de.tsa.homecosts.fragments.HomeFragment;
 import de.tsa.homecosts.fragments.ReportFragment;
+import de.tsa.homecosts.presenters.MainPresenter;
 import de.tsa.homecosts.presenters.MainPresenterCallback;
+import de.tsa.homecosts.presenters.MainPresenterImpl;
 import de.tsa.homecosts.utils.Constants;
 import de.tsa.homecosts.utils.ExpenditureItemAdapter;
 
 public class MainActivity extends AppCompatActivity implements MainPresenterCallback, ExpenditureItemAdapter.OnAdapterInteractionListener, HomeFragment.OnFragmentInteractionListener, ExpenditureFragment.OnFragmentInteractionListener, ReportFragment.OnFragmentInteractionListener{
+    private MainPresenter           mPresenter;
     private HomeFragment            fragmentHome;
     private ExpenditureFragment     fragmentExpenditure;
     private ReportFragment          fragmentReport;
@@ -57,8 +60,14 @@ public class MainActivity extends AppCompatActivity implements MainPresenterCall
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // Set bottom navigation action bar.
         BottomNavigationView navigation = findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+
+        // Set reference to the main presenter and its callback.
+        mPresenter = new MainPresenterImpl(this);
+        mPresenter.setContext(this);
 
         // Check that the activity is using the layout version with
         // the fragment_container FrameLayout
@@ -90,6 +99,7 @@ public class MainActivity extends AppCompatActivity implements MainPresenterCall
     @Override
     protected void onResume() {
         super.onResume();
+        mPresenter.getAllData();
     }
 
     @Override

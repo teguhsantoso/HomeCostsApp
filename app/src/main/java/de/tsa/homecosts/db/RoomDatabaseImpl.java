@@ -50,10 +50,10 @@ public class RoomDatabaseImpl implements RoomInteractor {
     }
 
     private void getObservableInsertData(final Expenditure data) {
-        Single<Integer> insertDataSingle = Single.fromCallable(new Callable<Integer>() {
+        Single<Long> insertDataSingle = Single.fromCallable(new Callable<Long>() {
 
             @Override
-            public Integer call() throws Exception {
+            public Long call() throws Exception {
                 return appDatabase.expenditureDao().insertProduct(data);
             }
         });
@@ -61,11 +61,11 @@ public class RoomDatabaseImpl implements RoomInteractor {
         mProductsSubscription = insertDataSingle
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new SingleSubscriber<Integer>() {
+                .subscribe(new SingleSubscriber<Long>() {
                     @Override
-                    public void onSuccess(Integer value) {
-                        Log.d(Constants.LOGGER, ">>> Inserted row: " + value);
-                        roomInteractionListener.affectedRow(value);
+                    public void onSuccess(Long value) {
+                        Log.d(Constants.LOGGER, ">>> Inserted Id: " + value);
+                        roomInteractionListener.insertedId(value);
                     }
 
                     @Override

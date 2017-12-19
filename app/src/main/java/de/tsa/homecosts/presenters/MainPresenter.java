@@ -8,4 +8,5 @@ import android.app.Activity;
 
 public interface MainPresenter {
     void setContext(Activity activity);
+    void getAllData();
 }
