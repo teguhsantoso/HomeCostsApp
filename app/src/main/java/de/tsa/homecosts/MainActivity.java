@@ -140,6 +140,14 @@ public class MainActivity extends AppCompatActivity implements MainPresenterCall
     }
 
     @Override
+    public void fillDataExpenditures(List expenditures) {
+        HomeFragment myFragment = (HomeFragment) getSupportFragmentManager().findFragmentByTag(Constants.TAG_FRAGMENT_HOME);
+        if (myFragment != null && myFragment.isVisible()) {
+            myFragment.updateListData(expenditures);
+        }
+    }
+
+    @Override
     public void onExpenditureItemClicked(Expenditure expenditure) {
         // TODO
         // Add implementation here.
@@ -153,6 +161,6 @@ public class MainActivity extends AppCompatActivity implements MainPresenterCall
         Log.d(Constants.LOGGER, ">>> OnStore data: " + expenditure.getMonth());
         Log.d(Constants.LOGGER, ">>> OnStore data: " + expenditure.getAmountPayment());
         Log.d(Constants.LOGGER, ">>> OnStore data: " + expenditure.getChargeDate());
-
+        mPresenter.addNewExpenditure(expenditure);
     }
 }

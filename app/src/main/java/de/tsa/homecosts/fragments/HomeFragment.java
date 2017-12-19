@@ -101,9 +101,9 @@ public class HomeFragment extends Fragment {
         data.add(data1);
         data.add(data2);
 
-        this.mAdapter = new ExpenditureItemAdapter(getActivity(), data);
-        this.mRecyclerView.setAdapter(mAdapter);
-        this.mAdapter.notifyDataSetChanged();
+        //this.mAdapter = new ExpenditureItemAdapter(getActivity(), data);
+        //this.mRecyclerView.setAdapter(mAdapter);
+        //this.mAdapter.notifyDataSetChanged();
     }
 
     private void initButtonRefreshList(View rootView) {
@@ -165,6 +165,12 @@ public class HomeFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
         mListener = null;
+    }
+
+    public void updateListData(List expenditures) {
+        this.mAdapter = new ExpenditureItemAdapter(getActivity(), expenditures);
+        this.mRecyclerView.setAdapter(mAdapter);
+        this.mAdapter.notifyDataSetChanged();
     }
 
 }

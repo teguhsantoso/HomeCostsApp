@@ -8,6 +8,7 @@ import java.util.List;
 
 import de.tsa.homecosts.db.RoomDatabaseImpl;
 import de.tsa.homecosts.db.RoomInteractor;
+import de.tsa.homecosts.entities.Expenditure;
 import de.tsa.homecosts.utils.Constants;
 
 /**
@@ -35,8 +36,14 @@ public class MainPresenterImpl implements MainPresenter, RoomInteractor.OnRoomIn
     }
 
     @Override
+    public void addNewExpenditure(Expenditure expenditure) {
+        roomInteractor.storeData(cTxt, expenditure, this);
+    }
+
+    @Override
     public void onResponse(List expenditures) {
         Log.d(Constants.LOGGER, ">>> Found data size: " + expenditures.size());
+        this.presenterCallback.fillDataExpenditures(expenditures);
     }
 
     @Override
@@ -46,6 +53,6 @@ public class MainPresenterImpl implements MainPresenter, RoomInteractor.OnRoomIn
 
     @Override
     public void insertedId(long id) {
-
+        Log.d(Constants.LOGGER, ">>> Add new data Id: " + id);
     }
 }
