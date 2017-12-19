@@ -1,7 +1,6 @@
 package de.tsa.homecosts.entities;
 
 import android.arch.persistence.room.ColumnInfo;
-import android.arch.persistence.room.Embedded;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
 
@@ -34,8 +33,8 @@ public class Expenditure implements Serializable{
     @ColumnInfo(name = "amount")
     private double amountPayment;
 
-    @Embedded
-    OutcomeCategory category;
+    @ColumnInfo(name = "category")
+    private int category;
 
     public int getUid() {
         return uid;
@@ -61,14 +60,6 @@ public class Expenditure implements Serializable{
         this.chargeDate = chargeDate;
     }
 
-    public OutcomeCategory getCategory() {
-        return category;
-    }
-
-    public void setCategory(OutcomeCategory category) {
-        this.category = category;
-    }
-
     public int getYear() {
         return year;
     }
@@ -91,5 +82,13 @@ public class Expenditure implements Serializable{
 
     public void setAmountPayment(double amountPayment) {
         this.amountPayment = amountPayment;
+    }
+
+    public int getCategory() {
+        return category;
+    }
+
+    public void setCategory(int category) {
+        this.category = category;
     }
 }

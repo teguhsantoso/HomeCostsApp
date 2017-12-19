@@ -11,6 +11,7 @@ import android.widget.TextView;
 import java.util.List;
 
 import de.tsa.homecosts.R;
+import de.tsa.homecosts.entities.CategoryType;
 import de.tsa.homecosts.entities.Expenditure;
 
 public class ExpenditureItemAdapter extends RecyclerView.Adapter<ExpenditureItemAdapter.CustomViewHolder> {
@@ -38,7 +39,7 @@ public class ExpenditureItemAdapter extends RecyclerView.Adapter<ExpenditureItem
     @Override
     public void onBindViewHolder(final CustomViewHolder customViewHolder, final int i) {
         customViewHolder.textViewExpenditureName.setText(data.get(i).getChargeDate() + "\n" + data.get(i).getName());
-        customViewHolder.textViewCategory.setText(data.get(i).getCategory().getName());
+        customViewHolder.textViewCategory.setText((data.get(i).getCategory() == 1) ? CategoryType.INCOME.toString() : CategoryType.OUTCOME.toString());
         customViewHolder.textViewSumPayment.setText(String.valueOf(data.get(i).getAmountPayment()) + " EUR");
     }
 

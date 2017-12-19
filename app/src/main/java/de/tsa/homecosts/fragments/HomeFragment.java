@@ -20,7 +20,6 @@ import java.util.List;
 
 import de.tsa.homecosts.R;
 import de.tsa.homecosts.entities.Expenditure;
-import de.tsa.homecosts.entities.OutcomeCategory;
 import de.tsa.homecosts.utils.Constants;
 import de.tsa.homecosts.utils.ExpenditureItemAdapter;
 
@@ -88,7 +87,7 @@ public class HomeFragment extends Fragment {
         List data = new ArrayList<Expenditure>();
         Expenditure data1 = new Expenditure();
         data1.setName("Volksbank Wohnung Ratenzahlung");
-        data1.setCategory(new OutcomeCategory("Konto Abbuchung"));
+        data1.setCategory(0);
         data1.setChargeDate("01.12.2017");
         data1.setMonth(11);
         data1.setYear(2017);
@@ -96,7 +95,7 @@ public class HomeFragment extends Fragment {
 
         Expenditure data2 = new Expenditure();
         data2.setName("ALLIANZ Rechtschutz");
-        data2.setCategory(new OutcomeCategory("Konto Abbuchung"));
+        data2.setCategory(0);
         data2.setChargeDate("03.12.2017");
         data2.setMonth(11);
         data2.setYear(2017);
