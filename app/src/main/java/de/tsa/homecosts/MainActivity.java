@@ -37,6 +37,7 @@ public class MainActivity extends AppCompatActivity implements MainPresenterCall
                     transaction.replace(R.id.fragment_container, fragmentHome, Constants.TAG_FRAGMENT_HOME);
                     transaction.addToBackStack(null);
                     transaction.commit();
+                    refreshListData();
                     return true;
                 case R.id.navigation_dashboard:
                     transaction = getSupportFragmentManager().beginTransaction();
@@ -98,7 +99,7 @@ public class MainActivity extends AppCompatActivity implements MainPresenterCall
     @Override
     protected void onResume() {
         super.onResume();
-        mPresenter.getAllData();
+        refreshListData();
     }
 
     @Override
@@ -140,10 +141,7 @@ public class MainActivity extends AppCompatActivity implements MainPresenterCall
 
     @Override
     public void fillDataExpenditures(List expenditures) {
-        HomeFragment myFragment = (HomeFragment) getSupportFragmentManager().findFragmentByTag(Constants.TAG_FRAGMENT_HOME);
-        if (myFragment != null && myFragment.isVisible()) {
-            myFragment.updateListData(expenditures);
-        }
+        fragmentHome.updateListData(expenditures);
     }
 
     @Override
@@ -156,4 +154,9 @@ public class MainActivity extends AppCompatActivity implements MainPresenterCall
     public void onStoreData(Expenditure expenditure) {
         mPresenter.addNewExpenditure(expenditure);
     }
+
+    private void refreshListData(){
+        mPresenter.getAllData();
+    }
+
 }

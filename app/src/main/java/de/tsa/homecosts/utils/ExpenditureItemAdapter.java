@@ -39,7 +39,7 @@ public class ExpenditureItemAdapter extends RecyclerView.Adapter<ExpenditureItem
     @Override
     public void onBindViewHolder(final CustomViewHolder customViewHolder, final int i) {
         customViewHolder.textViewExpenditureName.setText(data.get(i).getChargeDate() + "\n" + data.get(i).getName());
-        customViewHolder.textViewCategory.setText((data.get(i).getCategory() == 1) ? CategoryType.INCOME.toString() : CategoryType.OUTCOME.toString());
+        customViewHolder.textViewCategory.setText((data.get(i).getCategory() == 0) ? CategoryType.INCOME.toString() : CategoryType.OUTCOME.toString());
         customViewHolder.textViewSumPayment.setText(String.valueOf(data.get(i).getAmountPayment()) + " EUR");
     }
 
