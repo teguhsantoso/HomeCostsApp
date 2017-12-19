@@ -7,20 +7,21 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import java.util.List;
 
 import de.tsa.homecosts.entities.Expenditure;
 import de.tsa.homecosts.fragments.ExpenditureFragment;
 import de.tsa.homecosts.fragments.HomeFragment;
+import de.tsa.homecosts.fragments.ReportFragment;
 import de.tsa.homecosts.presenters.MainPresenterCallback;
 import de.tsa.homecosts.utils.Constants;
 import de.tsa.homecosts.utils.ExpenditureItemAdapter;
 
-public class MainActivity extends AppCompatActivity implements MainPresenterCallback, ExpenditureItemAdapter.OnAdapterInteractionListener, HomeFragment.OnFragmentInteractionListener, ExpenditureFragment.OnFragmentInteractionListener{
-    private HomeFragment fragmentHome;
-    private ExpenditureFragment fragmentExpenditure;
+public class MainActivity extends AppCompatActivity implements MainPresenterCallback, ExpenditureItemAdapter.OnAdapterInteractionListener, HomeFragment.OnFragmentInteractionListener, ExpenditureFragment.OnFragmentInteractionListener, ReportFragment.OnFragmentInteractionListener{
+    private HomeFragment            fragmentHome;
+    private ExpenditureFragment     fragmentExpenditure;
+    private ReportFragment          fragmentReport;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -36,12 +37,15 @@ public class MainActivity extends AppCompatActivity implements MainPresenterCall
                     return true;
                 case R.id.navigation_dashboard:
                     transaction = getSupportFragmentManager().beginTransaction();
-                    transaction.replace(R.id.fragment_container, fragmentExpenditure, "TAG2");
+                    transaction.replace(R.id.fragment_container, fragmentExpenditure, Constants.TAG_FRAGMENT_DASHBOARD);
                     transaction.addToBackStack(null);
                     transaction.commit();
                     return true;
-                case R.id.navigation_notifications:
-                    Toast.makeText(getApplicationContext(), "Coming soon.", Toast.LENGTH_SHORT).show();
+                case R.id.navigation_report:
+                    transaction = getSupportFragmentManager().beginTransaction();
+                    transaction.replace(R.id.fragment_container, fragmentReport, Constants.TAG_FRAGMENT_REPORT);
+                    transaction.addToBackStack(null);
+                    transaction.commit();
                     return true;
             }
             return false;
@@ -69,6 +73,7 @@ public class MainActivity extends AppCompatActivity implements MainPresenterCall
             // Create all fragments to be placed in the activity layout
             fragmentHome = HomeFragment.newInstance(Constants.TAG_FRAGMENT_HOME);
             fragmentExpenditure = ExpenditureFragment.newInstance("", "");
+            fragmentReport = ReportFragment.newInstance("", "");
 
             // Add the default fragment to the 'fragment_container' FrameLayout
             getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, fragmentHome).commit();
