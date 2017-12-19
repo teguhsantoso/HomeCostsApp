@@ -7,7 +7,6 @@ import java.util.List;
  */
 
 public interface MainPresenterCallback {
-    void showExpenditures(List expenditures);
     void fillDataExpenditures(List expenditures);
     void showMessage(String s);
 }

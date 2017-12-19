@@ -6,6 +6,7 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.MenuItem;
 import android.widget.Toast;
 
@@ -35,17 +36,25 @@ public class MainActivity extends AppCompatActivity implements MainPresenterCall
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.navigation_home:
+
                     FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
                     transaction.replace(R.id.fragment_container, fragmentHome, Constants.TAG_FRAGMENT_HOME);
                     transaction.addToBackStack(null);
                     transaction.commit();
+
+                    // Refresh the list of expenditures.
                     refreshListData();
+
                     return true;
                 case R.id.navigation_dashboard:
                     transaction = getSupportFragmentManager().beginTransaction();
                     transaction.replace(R.id.fragment_container, fragmentExpenditure, Constants.TAG_FRAGMENT_DASHBOARD);
                     transaction.addToBackStack(null);
                     transaction.commit();
+
+                    // Clear all input fields.
+                    resetInputFields();
+
                     return true;
                 case R.id.navigation_report:
                     transaction = getSupportFragmentManager().beginTransaction();
@@ -137,19 +146,13 @@ public class MainActivity extends AppCompatActivity implements MainPresenterCall
     }
 
     @Override
-    public void showExpenditures(List expenditures) {
-        // TODO
-        // Add implementation here.
-    }
-
-    @Override
     public void fillDataExpenditures(List expenditures) {
         fragmentHome.updateListData(expenditures);
     }
 
     @Override
     public void showMessage(String s) {
-        Toast.makeText(getApplicationContext(), s, Toast.LENGTH_LONG).show();
+        Toast.makeText(getApplicationContext(), s, Toast.LENGTH_SHORT).show();
         refreshListData();
     }
 
@@ -171,6 +174,10 @@ public class MainActivity extends AppCompatActivity implements MainPresenterCall
 
     private void refreshListData(){
         mPresenter.getAllData();
+    }
+
+    private void resetInputFields() {
+        Log.d(Constants.LOGGER, ">>> Reset input fields.");
     }
 
 }
