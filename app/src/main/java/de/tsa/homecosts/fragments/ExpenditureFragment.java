@@ -94,11 +94,11 @@ public class ExpenditureFragment extends Fragment {
                     int dayOfMonth = datePickerChargeExpenditure.getDayOfMonth();
                     int month = datePickerChargeExpenditure.getMonth() + 1;
                     int year = datePickerChargeExpenditure.getYear();
-                    String strChargeDate = String.valueOf(dayOfMonth) + "." + String.valueOf(month) + "." + String.valueOf(year);
+                    String strChargeDate = String.format("%02d", dayOfMonth) + "." + String.format("%02d", month) + "." + String.valueOf(year);
                     data.setChargeDate(strChargeDate);
                     data.setMonth(month);
                     data.setYear(year);
-                    data.setAmountPayment(Double.valueOf(editTextSumMoney.getText().toString().trim()));
+                    data.setAmountPayment(Double.valueOf(editTextSumMoney.getText().toString()));
                     mListener.onStoreData(data);
                 }
             }

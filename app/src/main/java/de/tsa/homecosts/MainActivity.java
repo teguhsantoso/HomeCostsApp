@@ -23,6 +23,7 @@ import de.tsa.homecosts.utils.ExpenditureItemAdapter;
 
 public class MainActivity extends AppCompatActivity implements MainPresenterCallback, ExpenditureItemAdapter.OnAdapterInteractionListener, HomeFragment.OnFragmentInteractionListener, ExpenditureFragment.OnFragmentInteractionListener, ReportFragment.OnFragmentInteractionListener{
     private MainPresenter           mPresenter;
+    private BottomNavigationView    navigation;
     private HomeFragment            fragmentHome;
     private ExpenditureFragment     fragmentExpenditure;
     private ReportFragment          fragmentReport;
@@ -63,7 +64,7 @@ public class MainActivity extends AppCompatActivity implements MainPresenterCall
         setContentView(R.layout.activity_main);
 
         // Set bottom navigation action bar.
-        BottomNavigationView navigation = findViewById(R.id.navigation);
+        navigation = findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
         // Set reference to the main presenter and its callback.
@@ -105,7 +106,7 @@ public class MainActivity extends AppCompatActivity implements MainPresenterCall
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
+        // Do nothing.
     }
 
     @Override

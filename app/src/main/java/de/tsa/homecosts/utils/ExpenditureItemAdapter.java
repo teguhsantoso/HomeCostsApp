@@ -1,6 +1,7 @@
 package de.tsa.homecosts.utils;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -41,6 +42,7 @@ public class ExpenditureItemAdapter extends RecyclerView.Adapter<ExpenditureItem
     public void onBindViewHolder(final CustomViewHolder customViewHolder, final int i) {
         customViewHolder.textViewExpenditureName.setText(data.get(i).getChargeDate() + "\n" + data.get(i).getName());
         customViewHolder.textViewCategory.setText((data.get(i).getCategory() == 0) ? CategoryType.INCOME.toString() : CategoryType.OUTCOME.toString());
+        customViewHolder.textViewSumPayment.setTextColor((data.get(i).getCategory()==0) ? Color.BLUE : Color.RED);
         customViewHolder.textViewSumPayment.setText(String.valueOf(data.get(i).getAmountPayment()) + " EUR");
     }
 
