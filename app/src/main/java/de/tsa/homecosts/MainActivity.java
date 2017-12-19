@@ -7,6 +7,7 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -142,6 +143,11 @@ public class MainActivity extends AppCompatActivity implements MainPresenterCall
     @Override
     public void fillDataExpenditures(List expenditures) {
         fragmentHome.updateListData(expenditures);
+    }
+
+    @Override
+    public void showMessage(String s) {
+        Toast.makeText(getApplicationContext(), s, Toast.LENGTH_LONG).show();
     }
 
     @Override
