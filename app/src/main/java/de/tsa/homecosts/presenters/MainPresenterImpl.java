@@ -2,14 +2,12 @@ package de.tsa.homecosts.presenters;
 
 import android.app.Activity;
 import android.content.Context;
-import android.util.Log;
 
 import java.util.List;
 
 import de.tsa.homecosts.db.RoomDatabaseImpl;
 import de.tsa.homecosts.db.RoomInteractor;
 import de.tsa.homecosts.entities.Expenditure;
-import de.tsa.homecosts.utils.Constants;
 
 /**
  * Created by Teguh Santoso on 25.11.2017.
@@ -31,6 +29,11 @@ public class MainPresenterImpl implements MainPresenter, RoomInteractor.OnRoomIn
     }
 
     @Override
+    public void onDestroy() {
+        roomInteractor.unsubscribe();
+    }
+
+    @Override
     public void getAllData() {
         roomInteractor.getAllData(cTxt, this);
     }
@@ -41,13 +44,18 @@ public class MainPresenterImpl implements MainPresenter, RoomInteractor.OnRoomIn
     }
 
     @Override
+    public void deleteData(Expenditure expenditure) {
+        roomInteractor.deleteData(cTxt, expenditure, this);
+    }
+
+    @Override
     public void onResponse(List expenditures) {
         presenterCallback.fillDataExpenditures(expenditures);
     }
 
     @Override
     public void affectedRow(int rows) {
-
+        presenterCallback.showMessage("Affected row: " + rows);
     }
 
     @Override

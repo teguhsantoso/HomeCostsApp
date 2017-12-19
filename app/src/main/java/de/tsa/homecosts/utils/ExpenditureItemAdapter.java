@@ -18,6 +18,7 @@ public class ExpenditureItemAdapter extends RecyclerView.Adapter<ExpenditureItem
 
     public interface OnAdapterInteractionListener {
         void onExpenditureItemClicked(Expenditure expenditure);
+        void onDeleteData(Expenditure expenditure);
     }
 
     private static Context                          cTxt;
@@ -59,11 +60,18 @@ public class ExpenditureItemAdapter extends RecyclerView.Adapter<ExpenditureItem
             this.textViewExpenditureName = view.findViewById(R.id.textViewExpenditureName);
             this.textViewCategory = view.findViewById(R.id.textViewCategory);
             this.textViewSumPayment = view.findViewById(R.id.textViewSum);
+            this.buttonDeleteItem = view.findViewById(R.id.imageButtonDeleteItem);
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    // Do nothing.
+                }
+            });
+            this.buttonDeleteItem.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
                     mListener = (OnAdapterInteractionListener) cTxt;
-                    mListener.onExpenditureItemClicked(data.get(getAdapterPosition()));
+                    mListener.onDeleteData(data.get(getAdapterPosition()));
                 }
             });
         }

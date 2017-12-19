@@ -10,6 +10,8 @@ import de.tsa.homecosts.entities.Expenditure;
 
 public interface MainPresenter {
     void setContext(Activity activity);
+    void onDestroy();
     void getAllData();
     void addNewExpenditure(Expenditure expenditure);
+    void deleteData(Expenditure expenditure);
 }

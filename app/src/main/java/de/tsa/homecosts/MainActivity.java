@@ -126,6 +126,7 @@ public class MainActivity extends AppCompatActivity implements MainPresenterCall
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        mPresenter.onDestroy();
     }
 
     @Override
@@ -154,6 +155,11 @@ public class MainActivity extends AppCompatActivity implements MainPresenterCall
     public void onExpenditureItemClicked(Expenditure expenditure) {
         // TODO
         // Add implementation here.
+    }
+
+    @Override
+    public void onDeleteData(Expenditure expenditure) {
+        mPresenter.deleteData(expenditure);
     }
 
     @Override

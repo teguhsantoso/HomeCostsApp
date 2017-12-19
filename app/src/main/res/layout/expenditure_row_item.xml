@@ -27,6 +27,7 @@
         android:layout_alignParentTop="true"
         android:layout_marginStart="10dp"
         android:layout_toEndOf="@+id/imageView"
+        android:layout_toStartOf="@+id/imageButtonDeleteItem"
         android:text="Expenditure name"
         android:textSize="16sp" />
 
@@ -36,14 +37,25 @@
         android:layout_height="wrap_content"
         android:layout_alignStart="@+id/textViewExpenditureName"
         android:layout_below="@+id/textViewExpenditureName"
+        android:layout_toStartOf="@+id/imageButtonDeleteItem"
         android:text="Category" />
 
     <TextView
         android:id="@+id/textViewSum"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/textViewCategory"
         android:layout_alignStart="@+id/textViewCategory"
         android:layout_below="@+id/textViewCategory"
         android:text="Sum of payment" />
+
+    <ImageButton
+        android:id="@+id/imageButtonDeleteItem"
+        android:layout_width="50dp"
+        android:layout_height="60dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        android:scaleType="fitCenter"
+        app:srcCompat="@drawable/ic_delete_forever_black_18dp" />
 
 </RelativeLayout>
