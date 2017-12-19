@@ -5,13 +5,13 @@ public enum CategoryType {
     INCOME {
         @Override
         public String toString() {
-            return "Income";
+            return "Einkommen";
         }
     },
     OUTCOME {
         @Override
         public String toString() {
-            return "Expenditure";
+            return "Ausgabe";
         }
     }
 

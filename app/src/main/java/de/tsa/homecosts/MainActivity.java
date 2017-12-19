@@ -6,6 +6,7 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.MenuItem;
 
 import java.util.List;
@@ -72,8 +73,8 @@ public class MainActivity extends AppCompatActivity implements MainPresenterCall
 
             // Create all fragments to be placed in the activity layout
             fragmentHome = HomeFragment.newInstance(Constants.TAG_FRAGMENT_HOME);
-            fragmentExpenditure = ExpenditureFragment.newInstance("", "");
-            fragmentReport = ReportFragment.newInstance("", "");
+            fragmentExpenditure = ExpenditureFragment.newInstance(Constants.TAG_FRAGMENT_DASHBOARD);
+            fragmentReport = ReportFragment.newInstance(Constants.TAG_FRAGMENT_REPORT);
 
             // Add the default fragment to the 'fragment_container' FrameLayout
             getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, fragmentHome).commit();
@@ -132,5 +133,16 @@ public class MainActivity extends AppCompatActivity implements MainPresenterCall
     public void onExpenditureItemClicked(Expenditure expenditure) {
         // TODO
         // Add implementation here.
+    }
+
+    @Override
+    public void onStoreData(Expenditure expenditure) {
+        Log.d(Constants.LOGGER, ">>> OnStore data: " + expenditure.getCategory());
+        Log.d(Constants.LOGGER, ">>> OnStore data: " + expenditure.getName());
+        Log.d(Constants.LOGGER, ">>> OnStore data: " + expenditure.getYear());
+        Log.d(Constants.LOGGER, ">>> OnStore data: " + expenditure.getMonth());
+        Log.d(Constants.LOGGER, ">>> OnStore data: " + expenditure.getAmountPayment());
+        Log.d(Constants.LOGGER, ">>> OnStore data: " + expenditure.getChargeDate());
+
     }
 }
