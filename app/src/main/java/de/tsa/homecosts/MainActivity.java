@@ -149,6 +149,7 @@ public class MainActivity extends AppCompatActivity implements MainPresenterCall
     @Override
     public void showMessage(String s) {
         Toast.makeText(getApplicationContext(), s, Toast.LENGTH_LONG).show();
+        refreshListData();
     }
 
     @Override
