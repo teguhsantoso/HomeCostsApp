@@ -6,7 +6,6 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.MenuItem;
 import android.widget.Toast;
 
@@ -36,25 +35,20 @@ public class MainActivity extends AppCompatActivity implements MainPresenterCall
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.navigation_home:
-
                     FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
                     transaction.replace(R.id.fragment_container, fragmentHome, Constants.TAG_FRAGMENT_HOME);
                     transaction.addToBackStack(null);
                     transaction.commit();
-
-                    // Refresh the list of expenditures.
                     refreshListData();
-
                     return true;
                 case R.id.navigation_dashboard:
+                    Bundle bundle = new Bundle();
+                    bundle.putBoolean(Constants.PARAM_KEY_RESET_FIELDS, Boolean.TRUE);
+                    fragmentExpenditure.setArguments(bundle);
                     transaction = getSupportFragmentManager().beginTransaction();
                     transaction.replace(R.id.fragment_container, fragmentExpenditure, Constants.TAG_FRAGMENT_DASHBOARD);
                     transaction.addToBackStack(null);
                     transaction.commit();
-
-                    // Clear all input fields.
-                    resetInputFields();
-
                     return true;
                 case R.id.navigation_report:
                     transaction = getSupportFragmentManager().beginTransaction();
@@ -174,10 +168,6 @@ public class MainActivity extends AppCompatActivity implements MainPresenterCall
 
     private void refreshListData(){
         mPresenter.getAllData();
-    }
-
-    private void resetInputFields() {
-        Log.d(Constants.LOGGER, ">>> Reset input fields.");
     }
 
 }

@@ -3,6 +3,7 @@ package de.tsa.homecosts.fragments;
 import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -20,6 +21,7 @@ import java.util.List;
 import de.tsa.homecosts.R;
 import de.tsa.homecosts.entities.CategoryType;
 import de.tsa.homecosts.entities.Expenditure;
+import de.tsa.homecosts.utils.Constants;
 
 
 /**
@@ -76,6 +78,12 @@ public class ExpenditureFragment extends Fragment {
         initDatePicker(rootView);
         initButtonStoreData(rootView);
         return rootView;
+    }
+
+    private void resetInputFields() {
+        this.spinnerCategory.setSelection(0);
+        this.editTextDescription.setText("");
+        this.editTextSumMoney.setText("0");
     }
 
     private void initEditTextSumMoney(View rootView) {
@@ -140,4 +148,11 @@ public class ExpenditureFragment extends Fragment {
         mListener = null;
     }
 
+    @Override
+    public void onViewStateRestored(@Nullable Bundle savedInstanceState) {
+        super.onViewStateRestored(savedInstanceState);
+        if(this.getArguments().getBoolean(Constants.PARAM_KEY_RESET_FIELDS)){
+            resetInputFields();
+        }
+    }
 }
