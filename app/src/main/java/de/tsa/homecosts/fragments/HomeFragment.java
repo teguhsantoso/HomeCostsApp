@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,7 +20,6 @@ import java.util.Calendar;
 import java.util.List;
 
 import de.tsa.homecosts.R;
-import de.tsa.homecosts.entities.Expenditure;
 import de.tsa.homecosts.utils.Constants;
 import de.tsa.homecosts.utils.ExpenditureItemAdapter;
 
@@ -80,30 +80,6 @@ public class HomeFragment extends Fragment {
     private void initRecyclerView(View rootView) {
         this.mRecyclerView = rootView.findViewById(R.id.expenditures);
         this.mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-
-        List data = new ArrayList<Expenditure>();
-        Expenditure data1 = new Expenditure();
-        data1.setName("Volksbank Wohnung Ratenzahlung");
-        data1.setCategory(0);
-        data1.setChargeDate("01.12.2017");
-        data1.setMonth(11);
-        data1.setYear(2017);
-        data1.setAmountPayment(340.42);
-
-        Expenditure data2 = new Expenditure();
-        data2.setName("ALLIANZ Rechtschutz");
-        data2.setCategory(0);
-        data2.setChargeDate("03.12.2017");
-        data2.setMonth(11);
-        data2.setYear(2017);
-        data2.setAmountPayment(25.00);
-
-        data.add(data1);
-        data.add(data2);
-
-        //this.mAdapter = new ExpenditureItemAdapter(getActivity(), data);
-        //this.mRecyclerView.setAdapter(mAdapter);
-        //this.mAdapter.notifyDataSetChanged();
     }
 
     private void initButtonRefreshList(View rootView) {
@@ -154,6 +130,7 @@ public class HomeFragment extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
+        Log.d(Constants.LOGGER, ">>> onAttach");
         if (context instanceof OnFragmentInteractionListener) {
             mListener = (OnFragmentInteractionListener) context;
         } else {

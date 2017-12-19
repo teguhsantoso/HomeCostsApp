@@ -155,12 +155,6 @@ public class MainActivity extends AppCompatActivity implements MainPresenterCall
 
     @Override
     public void onStoreData(Expenditure expenditure) {
-        Log.d(Constants.LOGGER, ">>> OnStore data: " + expenditure.getCategory());
-        Log.d(Constants.LOGGER, ">>> OnStore data: " + expenditure.getName());
-        Log.d(Constants.LOGGER, ">>> OnStore data: " + expenditure.getYear());
-        Log.d(Constants.LOGGER, ">>> OnStore data: " + expenditure.getMonth());
-        Log.d(Constants.LOGGER, ">>> OnStore data: " + expenditure.getAmountPayment());
-        Log.d(Constants.LOGGER, ">>> OnStore data: " + expenditure.getChargeDate());
         mPresenter.addNewExpenditure(expenditure);
     }
 }

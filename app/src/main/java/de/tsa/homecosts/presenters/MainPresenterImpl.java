@@ -43,7 +43,7 @@ public class MainPresenterImpl implements MainPresenter, RoomInteractor.OnRoomIn
     @Override
     public void onResponse(List expenditures) {
         Log.d(Constants.LOGGER, ">>> Found data size: " + expenditures.size());
-        this.presenterCallback.fillDataExpenditures(expenditures);
+        presenterCallback.fillDataExpenditures(expenditures);
     }
 
     @Override
