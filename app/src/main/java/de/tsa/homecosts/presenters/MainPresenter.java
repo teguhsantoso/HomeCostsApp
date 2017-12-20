@@ -12,6 +12,7 @@ public interface MainPresenter {
     void setContext(Activity activity);
     void onDestroy();
     void getAllData();
+    void getAllDataByParams(int mMonth, int mYear);
     void addNewExpenditure(Expenditure expenditure);
     void deleteData(Expenditure expenditure);
 }

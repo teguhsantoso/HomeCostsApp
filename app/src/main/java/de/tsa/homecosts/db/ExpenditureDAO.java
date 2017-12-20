@@ -18,6 +18,9 @@ public interface ExpenditureDAO {
     @Query("SELECT * FROM expenditures")
     List<Expenditure> getAll();
 
+    @Query("SELECT * FROM expenditures WHERE month=:mMonth AND year=:mYear")
+    List<Expenditure> getAllByMonthAndYear(int mMonth, int mYear);
+
     @Insert
     long insertProduct(Expenditure expenditure);
 

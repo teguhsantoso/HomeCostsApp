@@ -39,6 +39,11 @@ public class MainPresenterImpl implements MainPresenter, RoomInteractor.OnRoomIn
     }
 
     @Override
+    public void getAllDataByParams(int mMonth, int mYear) {
+        roomInteractor.getAllDataByMonthAndYear(cTxt, mMonth, mYear, this);
+    }
+
+    @Override
     public void addNewExpenditure(Expenditure expenditure) {
         roomInteractor.storeData(cTxt, expenditure, this);
     }

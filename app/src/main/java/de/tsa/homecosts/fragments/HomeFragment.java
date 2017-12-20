@@ -1,7 +1,6 @@
 package de.tsa.homecosts.fragments;
 
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -35,7 +34,7 @@ import de.tsa.homecosts.utils.ExpenditureItemAdapter;
 public class HomeFragment extends Fragment {
 
     public interface OnFragmentInteractionListener {
-        void onFragmentInteraction(Uri uri);
+        void onSearchData(int mMonth, int mYear);
     }
 
     private static final String             ARG_PARAM_FRAGMENT_TAG = "fragmentTag";
@@ -87,7 +86,11 @@ public class HomeFragment extends Fragment {
         buttonRefreshListExpenditures.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                if (mListener != null) {
+                    int mMonth = (int) spinnerMonth.getSelectedItemPosition();
+                    int mYear = (int) spinnerYear.getSelectedItem();
+                    mListener.onSearchData((mMonth+1), mYear);
+                }
             }
         });
     }
@@ -121,12 +124,6 @@ public class HomeFragment extends Fragment {
         spinnerYear.setSelection(((ArrayAdapter<String>)spinnerYear.getAdapter()).getPosition(String.valueOf(year)));
     }
 
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
-    }
-
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -146,7 +143,6 @@ public class HomeFragment extends Fragment {
     @Override
     public void onViewStateRestored(@Nullable Bundle savedInstanceState) {
         super.onViewStateRestored(savedInstanceState);
-
     }
 
     public void updateListData(List expenditures) {

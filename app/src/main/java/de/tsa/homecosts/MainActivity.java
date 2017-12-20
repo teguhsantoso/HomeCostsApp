@@ -170,4 +170,8 @@ public class MainActivity extends AppCompatActivity implements MainPresenterCall
         mPresenter.getAllData();
     }
 
+    @Override
+    public void onSearchData(int mMonth, int mYear) {
+        mPresenter.getAllDataByParams(mMonth, mYear);
+    }
 }

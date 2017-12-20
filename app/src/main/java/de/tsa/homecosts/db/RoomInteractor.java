@@ -20,6 +20,8 @@ public interface RoomInteractor {
 
     void getAllData(Context cTxt, OnRoomInteractionListener listener);
 
+    void getAllDataByMonthAndYear(Context cTxt, int mMonth, int mYear, OnRoomInteractionListener listener);
+
     void storeData(Context cTxt, Expenditure expenditure, OnRoomInteractionListener listener);
 
     void deleteData(Context cTxt, Expenditure expenditure, OnRoomInteractionListener listener);

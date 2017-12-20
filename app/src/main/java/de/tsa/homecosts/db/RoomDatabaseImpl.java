@@ -23,6 +23,32 @@ public class RoomDatabaseImpl implements RoomInteractor {
     private OnRoomInteractionListener       roomInteractionListener;
     private Subscription                    mProductsSubscription;
 
+    private void getObservableAllDataByMonthAndYear(final int mMonth, final int mYear) {
+        Single<List<Expenditure>> getAllDataByMonthAndYearSingle = Single.fromCallable(new Callable<List<Expenditure>>() {
+
+            @Override
+            public List<Expenditure> call() throws Exception {
+                return appDatabase.expenditureDao().getAllByMonthAndYear(mMonth, mYear);
+            }
+        });
+
+        mProductsSubscription = getAllDataByMonthAndYearSingle
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new SingleSubscriber<List<Expenditure>>() {
+                    @Override
+                    public void onSuccess(List<Expenditure> value) {
+                        Log.d(Constants.LOGGER, ">>> Get data size: #" + value.size());
+                        roomInteractionListener.onResponse(value);
+                    }
+
+                    @Override
+                    public void onError(Throwable error) {
+                        // Do nothing.
+                    }
+                });
+    }
+
     private void getObservableAllData() {
         Single<List<Expenditure>> getAllDataSingle = Single.fromCallable(new Callable<List<Expenditure>>() {
 
@@ -38,7 +64,7 @@ public class RoomDatabaseImpl implements RoomInteractor {
                 .subscribe(new SingleSubscriber<List<Expenditure>>() {
                     @Override
                     public void onSuccess(List<Expenditure> value) {
-                        Log.d(Constants.LOGGER, ">>> Get all row(s): " + value.size());
+                        Log.d(Constants.LOGGER, ">>> Get data size: #" + value.size());
                         roomInteractionListener.onResponse(value);
                     }
 
@@ -90,7 +116,7 @@ public class RoomDatabaseImpl implements RoomInteractor {
                 .subscribe(new SingleSubscriber<Integer>() {
                     @Override
                     public void onSuccess(Integer value) {
-                        Log.d(Constants.LOGGER, ">>> Delete affected row: " + value);
+                        Log.d(Constants.LOGGER, ">>> Deleted affected row: #" + value);
                         roomInteractionListener.affectedRow(value);
                     }
 
@@ -107,6 +133,15 @@ public class RoomDatabaseImpl implements RoomInteractor {
         this.roomInteractionListener = listener;
         getObservableAllData();
     }
+
+    @Override
+    public void getAllDataByMonthAndYear(Context cTxt, int mMonth, int mYear, OnRoomInteractionListener listener) {
+        this.appDatabase = AppDatabase.getAppDatabase(cTxt);
+        this.roomInteractionListener = listener;
+        getObservableAllDataByMonthAndYear(mMonth, mYear);
+    }
+
+
 
     @Override
     public void storeData(Context cTxt, Expenditure data, OnRoomInteractionListener listener) {
