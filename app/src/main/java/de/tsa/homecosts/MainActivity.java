@@ -1,5 +1,8 @@
 package de.tsa.homecosts;
 
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -22,6 +25,7 @@ import de.tsa.homecosts.utils.Constants;
 import de.tsa.homecosts.utils.ExpenditureItemAdapter;
 
 public class MainActivity extends AppCompatActivity implements MainPresenterCallback, ExpenditureItemAdapter.OnAdapterInteractionListener, HomeFragment.OnFragmentInteractionListener, ExpenditureFragment.OnFragmentInteractionListener, ReportFragment.OnFragmentInteractionListener{
+    private Context                 cTxt;
     private MainPresenter           mPresenter;
     private BottomNavigationView    navigation;
     private HomeFragment            fragmentHome;
@@ -65,6 +69,8 @@ public class MainActivity extends AppCompatActivity implements MainPresenterCall
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        cTxt = this;
 
         // Set bottom navigation action bar.
         navigation = findViewById(R.id.navigation);
@@ -158,7 +164,31 @@ public class MainActivity extends AppCompatActivity implements MainPresenterCall
 
     @Override
     public void onDeleteData(Expenditure expenditure) {
-        mPresenter.deleteData(expenditure);
+        showAlertDialog(expenditure);
+    }
+
+    private void showAlertDialog(final Expenditure expenditure) {
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(cTxt);
+        alertDialogBuilder.setTitle("App System Dialog");
+        alertDialogBuilder
+                .setMessage("Diese Daten wirklich löschen?")
+                .setCancelable(false)
+                .setPositiveButton("Ja",new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog,int id) {
+                        mPresenter.deleteData(expenditure);
+                    }
+                })
+                .setNegativeButton("Nein",new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog,int id) {
+                        dialog.cancel();
+                    }
+                });
+
+        // Create alert dialog instance.
+        AlertDialog alertDialog = alertDialogBuilder.create();
+
+        // Show the alert dialog.
+        alertDialog.show();
     }
 
     @Override
