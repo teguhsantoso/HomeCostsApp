@@ -9,7 +9,7 @@
         android:id="@+id/textViewTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Liste Ausgaben SANTOSO"
+        android:text="Liste Einkommen und Ausgaben"
         android:textSize="14sp"
         android:layout_marginTop="5dp"
         android:textStyle="bold" />
@@ -55,7 +55,7 @@
         android:layout_height="2dip"
         android:layout_below="@id/spinnerMonth"
         android:layout_marginTop="5dp"
-        android:background="@color/colorAccent"
+        android:background="@color/colorPrimary"
         android:id="@+id/separator" />
 
     <ImageButton
