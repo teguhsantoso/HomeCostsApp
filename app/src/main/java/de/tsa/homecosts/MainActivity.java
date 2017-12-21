@@ -139,7 +139,11 @@ public class MainActivity extends AppCompatActivity implements MainPresenterCall
 
     @Override
     public void fillDataExpenditures(List expenditures) {
-        fragmentHome.updateListData(expenditures);
+        if(fragmentHome.isVisible()){
+            fragmentHome.updateListData(expenditures);
+        }else if(fragmentReport.isVisible()){
+            fragmentReport.updateBalanceData(expenditures);
+        }
     }
 
     @Override
@@ -202,6 +206,6 @@ public class MainActivity extends AppCompatActivity implements MainPresenterCall
 
     @Override
     public void onCalculateBalancePeriode(int mMonth, int mYear) {
-
+        mPresenter.getAllDataByParams(mMonth, mYear);
     }
 }

@@ -1,6 +1,7 @@
 package de.tsa.homecosts.fragments;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -8,7 +9,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageButton;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import java.text.DateFormatSymbols;
 import java.util.ArrayList;
@@ -16,6 +19,7 @@ import java.util.Calendar;
 import java.util.List;
 
 import de.tsa.homecosts.R;
+import de.tsa.homecosts.entities.Expenditure;
 import de.tsa.homecosts.utils.Constants;
 
 /**
@@ -37,6 +41,10 @@ public class ReportFragment extends Fragment {
     private OnFragmentInteractionListener   mListener;
     private Spinner                         spinnerYear;
     private Spinner                         spinnerMonth;
+    private TextView                        textViewIncome;
+    private TextView                        textViewOutcome;
+    private TextView                        textViewBalance;
+    private ImageButton                     buttonCalculateBalance;
 
     public ReportFragment() {
         // Required empty public constructor
@@ -63,6 +71,8 @@ public class ReportFragment extends Fragment {
         rootView = inflater.inflate(R.layout.fragment_report, container, false);
         initSpinnerYear(rootView);
         initSpinnerMonth(rootView);
+        iniAllTextViews(rootView);
+        initButtonCalculateBalance(rootView);
         return rootView;
     }
 
@@ -80,6 +90,12 @@ public class ReportFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
         mListener = null;
+    }
+
+    private void iniAllTextViews(View rootView) {
+        textViewIncome = rootView.findViewById(R.id.textViewSumIncome);
+        textViewOutcome = rootView.findViewById(R.id.textViewSumOutcome);
+        textViewBalance = rootView.findViewById(R.id.textViewSumBalance);
     }
 
     private void initSpinnerMonth(View rootView) {
@@ -111,9 +127,48 @@ public class ReportFragment extends Fragment {
         spinnerYear.setSelection(((ArrayAdapter<String>)spinnerYear.getAdapter()).getPosition(String.valueOf(year)));
     }
 
+    private void initButtonCalculateBalance(View rootView) {
+        buttonCalculateBalance = rootView.findViewById(R.id.imageButtonCalculateBalance);
+        buttonCalculateBalance.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (mListener != null) {
+                    int mMonth = (int) spinnerMonth.getSelectedItemPosition();
+                    int mYear = (int) spinnerYear.getSelectedItem();
+                    mListener.onCalculateBalancePeriode((mMonth+1), mYear);
+                }
+            }
+        });
+    }
+
     @Override
     public void onViewStateRestored(@Nullable Bundle savedInstanceState) {
         super.onViewStateRestored(savedInstanceState);
+    }
+
+    public void updateBalanceData(List expenditures) {
+        List<Expenditure> mList = expenditures;
+
+        double sumOfIncome = 0.0;
+        for (Expenditure data : mList) {
+            if(data.getCategory() == 0){
+                sumOfIncome = sumOfIncome + data.getAmountPayment();
+            }
+        }
+
+        double sumOfOutcome = 0.0;
+        for (Expenditure data : mList) {
+            if(data.getCategory() == 1){
+                sumOfOutcome = sumOfOutcome + data.getAmountPayment();
+            }
+        }
+
+        double balanceMonth = sumOfIncome - sumOfOutcome;
+
+        textViewIncome.setText(sumOfIncome + " EUR");
+        textViewOutcome.setText(sumOfOutcome + " EUR");
+        textViewBalance.setTextColor((balanceMonth < 0.0) ? Color.RED : Color.BLUE);
+        textViewBalance.setText(balanceMonth + " EUR");
     }
 
 }
