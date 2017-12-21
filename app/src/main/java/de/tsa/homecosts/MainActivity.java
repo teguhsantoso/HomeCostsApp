@@ -3,7 +3,6 @@ package de.tsa.homecosts;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -139,12 +138,6 @@ public class MainActivity extends AppCompatActivity implements MainPresenterCall
     }
 
     @Override
-    public void onFragmentInteraction(Uri uri) {
-        // TODO
-        // Add implementation here.
-    }
-
-    @Override
     public void fillDataExpenditures(List expenditures) {
         fragmentHome.updateListData(expenditures);
     }
@@ -205,5 +198,10 @@ public class MainActivity extends AppCompatActivity implements MainPresenterCall
     @Override
     public void onSearchData(int mMonth, int mYear) {
         mPresenter.getAllDataByParams(mMonth, mYear);
+    }
+
+    @Override
+    public void onCalculateBalancePeriode(int mMonth, int mYear) {
+
     }
 }
